@@ -68,12 +68,19 @@ Setelah meginstal seluruh aplikasi di bagian sebelumnya, untuk menjalankan API, 
 ## Usage
 API ini memiliki beberapa fitur, yaitu:
 1. Login
+  Fitur ini adalah fitur yang paling pertama kali harus dijalankan karena fitur lainnya dapat diakses dengan x-access-token yang diperoleh dari respons setelah login.
 2. Get Own Profile
+  Fitur ini digunakan untuk memperoleh data profil user itu sendiri.
 3. Register User (khusus user dengan role admin)
+  Fitur ini digunakan untuk mendaftarkan user baru ke dalam database. User yang didaftarkan dalam memiliki role `user` atau `admin`.
 4. Get Specific User (admin dapat melihat keseluruhan data user, sedangkan user biasa hanya dapat melihat username dan role)
+  Fitur ini digunakan untuk melihat data salah satu user.
 5. Get List of All Users (khusus user dengan role admin)
+  Fitur ini digunakan untuk memperoleh list seluruh user yang ada.
 6. Update User Profile (khusus user dengan role admin)
+  Fitur ini digunakan untuk mengupdate profil user.
 7. Delete User (khusus user dengan role admin)
+  Fitur ini digunakan untuk menghapus salah satu user.
 
 Penjelasan cara penggunaan tiap fitur/request dapat diakses dalam Documentation, dengan mengakses `http://localhost:3000/api-docs`.
 
