@@ -14,7 +14,6 @@ A Simple User Authentication with Role Based Access Control API for ServeU Softw
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
