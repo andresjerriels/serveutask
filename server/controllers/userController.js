@@ -131,8 +131,9 @@ exports.updateUser = async(req, res, next) => {
         }
         const update = req.body;
         const username = req.params.username;
+        const role = req.body.role;
         const foundUser = await User.findOne({ username });
-        if (role != "admin" || role != "user" || role != null) {
+        if (role != "admin" && role != "user") {
             res.json({
                 message: "Wrong role."
             });
