@@ -85,15 +85,18 @@
         }, {
           "in" : "formData",
           "name" : "username",
-          "type" : "string"
+          "type" : "string",
+          "required" : true
         }, {
           "in" : "formData",
           "name" : "password",
-          "type" : "string"
+          "type" : "string",
+          "required" : true
         }, {
           "in" : "formData",
           "name" : "role",
-          "type" : "string"
+          "type" : "string",
+          "required" : true
         } ],
         "responses" : {
           "200" : {
@@ -163,15 +166,18 @@
         }, {
           "in" : "formData",
           "name" : "username",
-          "type" : "string"
+          "type" : "string",
+          "required" : true
         }, {
           "in" : "formData",
           "name" : "password",
-          "type" : "string"
+          "type" : "string",
+          "required" : true
         }, {
           "in" : "formData",
           "name" : "role",
-          "type" : "string"
+          "type" : "string",
+          "required" : true
         } ],
         "responses" : {
           "200" : {
