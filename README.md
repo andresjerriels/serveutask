@@ -55,7 +55,7 @@ dalam komputer yang Anda gunakan.
 Setelah meginstal seluruh aplikasi di bagian sebelumnya, untuk menjalankan API, anda dapat mengikuti instruksi berikut:
 1. Clone repositori ini
    ```sh
-   git clone https://github.com/andresjerriels/serveu-rbac-task.git
+   git clone https://github.com/andresjerriels/serveutask.git
    ```
 2. Masuk ke dalam direktori tempat Anda membuat clone API ini, lalu buka terminal (jika menggunakan Mac / Linux) atau Command Prompt (jika menggunakan Windows) dan ketikkan ini ke dalamnya untuk menjalankan API pertama kalinya.
    ```sh
