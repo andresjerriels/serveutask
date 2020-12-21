@@ -1,0 +1,350 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "This API is a simple API that can be used to implement the User Authentication process with Role Based Access Control (RBAC). All requests other than login must include an x-access-token in the header, this x-access-token is obtained after a login request with a valid username and password.",
+    "version" : "1.0.0",
+    "title" : "Simple User Authentication with Role Based Access Control",
+    "contact" : {
+      "email" : "andres.sinabutar@gmail.com"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host" : "localhost:3000",
+  "basePath" : "/",
+  "tags" : [ {
+    "name" : "login",
+    "description" : "User/admin login"
+  }, {
+    "name" : "admin",
+    "description" : "Admin features"
+  }, {
+    "name" : "user",
+    "description" : "Basic user features"
+  } ],
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/login" : {
+      "post" : {
+        "tags" : [ "login" ],
+        "summary" : "Login to the server to obtain access token",
+        "description" : "Access token obtained and used to access all features based on user's role",
+        "consumes" : [ "application/x-www-form-urlencoded" ],
+        "parameters" : [ {
+          "in" : "formData",
+          "name" : "username",
+          "type" : "string",
+          "required" : true
+        }, {
+          "in" : "formData",
+          "name" : "password",
+          "type" : "string",
+          "required" : true
+        } ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful login",
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "data" : {
+                  "type" : "object",
+                  "properties" : {
+                    "username" : {
+                      "type" : "string"
+                    },
+                    "role" : {
+                      "type" : "string"
+                    }
+                  }
+                },
+                "accessToken" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/register" : {
+      "post" : {
+        "tags" : [ "admin" ],
+        "summary" : "Register a user or an admin",
+        "description" : "This can only be done by the logged in admin.",
+        "produces" : [ "application/json" ],
+        "consumes" : [ "application/x-www-form-urlencoded" ],
+        "parameters" : [ {
+          "in" : "header",
+          "name" : "x-access-token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "formData",
+          "name" : "username",
+          "type" : "string"
+        }, {
+          "in" : "formData",
+          "name" : "password",
+          "type" : "string"
+        }, {
+          "in" : "formData",
+          "name" : "role",
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful register",
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "data" : {
+                  "$ref" : "#/definitions/User"
+                },
+                "message" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/user/{username}" : {
+      "get" : {
+        "tags" : [ "admin" ],
+        "summary" : "Get specific user",
+        "description" : "This can only be done by the logged in admin.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "header",
+          "name" : "x-access-token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "username",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "data" : {
+                  "$ref" : "#/definitions/User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "admin" ],
+        "summary" : "Update a user profile",
+        "description" : "This can only be done by the logged in admin.",
+        "consumes" : [ "application/x-www-form-urlencoded" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "header",
+          "name" : "x-access-token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "username",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "formData",
+          "name" : "username",
+          "type" : "string"
+        }, {
+          "in" : "formData",
+          "name" : "password",
+          "type" : "string"
+        }, {
+          "in" : "formData",
+          "name" : "role",
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful update",
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "data" : {
+                  "$ref" : "#/definitions/User"
+                },
+                "message" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "admin" ],
+        "summary" : "Delete a user profile",
+        "description" : "This can only be done by the logged in admin.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "header",
+          "name" : "x-access-token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "username",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "data" : {
+                  "$ref" : "#/definitions/User"
+                },
+                "message" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/users" : {
+      "get" : {
+        "tags" : [ "admin" ],
+        "summary" : "Get a list of all users",
+        "description" : "This can only be done by the logged in admin.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "header",
+          "name" : "x-access-token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "data" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/definitions/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user" : {
+      "get" : {
+        "tags" : [ "user" ],
+        "summary" : "Get own user profile",
+        "description" : "This can only be done by the logged in user.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "header",
+          "name" : "x-access-token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "data" : {
+                  "$ref" : "#/definitions/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{username}" : {
+      "get" : {
+        "tags" : [ "user" ],
+        "summary" : "Get specific user",
+        "description" : "This can only be done by the logged in user.",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "header",
+          "name" : "x-access-token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "username",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "data" : {
+                  "type" : "object",
+                  "properties" : {
+                    "username" : {
+                      "type" : "string"
+                    },
+                    "role" : {
+                      "type" : "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "User" : {
+      "type" : "object",
+      "properties" : {
+        "role" : {
+          "type" : "string"
+        },
+        "_id" : {
+          "type" : "string"
+        },
+        "username" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "accessToken" : {
+          "type" : "string"
+        },
+        "__v" : {
+          "type" : "integer"
+        }
+      }
+    }
+  }
+}
